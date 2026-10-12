@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noodles® | Fast Spaghetti & More</title>
+  <meta name="description" content="Noodles® es la cadena internacional de comida rápida de spaguettis hervidos al instante, salteados al fuego y servidos en bowl transparente.">
+  <link rel="icon" type="image/jpeg" href="assets/images/logo.jpg">
+  <style>
+    :root {
+      --primary: #e63946;
+      --secondary: #1d3557;
+      --accent: #f4a261;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --gray-light: #e9ecef;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; scroll-behavior: smooth; }
+    body { background-color: #fff; color: var(--dark); line-height: 1.6; }
+
+    header { background: #fff; position: fixed; top: 0; width: 100%; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .header-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
+    .brand-logo-img { height: 45px; }
+    nav { display: flex; gap: 20px; align-items: center; }
+    nav a { text-decoration: none; color: var(--secondary); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+    nav a:hover { color: var(--primary); }
+    .btn-pedido { background-color: var(--primary); color: white !important; padding: 10px 20px; border-radius: 50px; text-decoration: none; }
+
+    section { padding: 90px 20px 60px; max-width: 1200px; margin: 0 auto; }
+    .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; min-height: 85vh; }
+    .hero-badge { background: rgba(230,57,70,0.1); color: var(--primary); padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; display: inline-block; margin-bottom: 20px; }
+    .hero h1 { font-size: 3rem; line-height: 1.1; color: var(--secondary); margin-bottom: 20px; }
+    .hero h1 span.red { color: var(--primary); }
+    .hero h1 span.gold { color: var(--accent); }
+    .hero p { font-size: 1.1rem; color: var(--gray); margin-bottom: 30px; }
+    .hero-cta { display: flex; gap: 15px; margin-bottom: 40px; }
+    .btn { background: var(--primary); color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; border: none; cursor: pointer; }
+    .btn-outline { border: 2px solid var(--secondary); color: var(--secondary); background: transparent; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: bold; }
+    .hero-features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .feature-box { background: var(--light); padding: 15px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 10px; }
+
+    .hero-img-card { background: var(--light); border-radius: 16px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+    .hero-img-card img { width: 100%; height: 350px; object-fit: cover; }
+    .hero-img-content { padding: 25px; }
+
+    /* Video Spot / Reproductor de Slides */
+    .video-spot-section { background: #111827; color: white; border-radius: 20px; padding: 50px 20px; margin: 40px auto; max-width: 1200px; }
+    .section-header-center { text-align: center; margin-bottom: 30px; }
+    .section-tag { color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+    .video-container { position: relative; max-width: 800px; margin: 0 auto; background: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+    .video-screen { position: relative; height: 420px; display: flex; align-items: flex-end; }
+    .video-bg-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+    .video-overlay { position: relative; z-index: 2; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); width: 100%; padding: 30px; }
+    .video-controls { display: flex; justify-content: space-between; align-items: center; background: #1f2937; padding: 15px 20px; }
+    .ctrl-btn { background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+
+    .section-header { text-align: center; margin-bottom: 50px; }
+    .section-header span { color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+    .section-header h2 { font-size: 2.2rem; color: var(--secondary); margin-top: 10px; }
+    .section-header p { color: var(--gray); max-width: 600px; margin: 10px auto 0; }
+
+    /* Builder / Configurador de Bowls */
+    .builder-section { background: var(--secondary); color: white; border-radius: 20px; padding: 50px; margin-top: 40px; }
+    .builder-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; }
+    .builder-step-card { background: rgba(255,255,255,0.05); padding: 25px; border-radius: 12px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
+    .builder-step-card h3 { color: var(--accent); margin-bottom: 15px; font-size: 1.1rem; }
+    .options-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .option-btn { background: rgba(255,255,255,0.1); border: 2px solid transparent; padding: 12px 10px; border-radius: 8px; color: white; cursor: pointer; text-align: center; transition: all 0.2s; font-size: 0.9rem; }
+    .option-btn.active { border-color: var(--accent); background: rgba(244,162,97,0.25); font-weight: bold; }
+    
+    .builder-summary-box { background: rgba(0,0,0,0.3); padding: 30px; border-radius: 12px; display: flex; flex-direction: column; justify-content: space-between; }
+    .summary-total { font-size: 2.5rem; font-weight: bold; color: var(--accent); margin: 20px 0; }
+
+    /* Footer */
+    footer { background: var(--secondary); color: white; padding: 60px 20px 30px; margin-top: 80px; text-align: center; }
+    footer p { color: var(--gray); font-size: 0.9rem; margin-top: 15px; }
+
+    @media (max-width: 768px) {
+      .hero, .builder-grid, .options-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.2rem; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <a href="#"><img src="assets/images/logo.jpg" alt="Noodles Logo" class="brand-logo-img"></a>
+      <nav>
+        <a href="#metodo">El Método</a>
+        <a href="#video-spot">Spot Promo</a>
+        <a href="#builder">Armá tu Bowl</a>
+        <a href="#locales">Sucursales</a>
+        <a href="#builder" class="btn-pedido">Pedir Online</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div>
+      <span class="hero-badge">⚡ Nuevo Concepto Fast-Casual Internacional 2026</span>
+      <h1>Spaguettis al Dente en 10 Minutos.<br><span class="red">Salteados al Fuego</span> y en tu <span class="gold">Bowl de Pasta</span>.</h1>
+      <p>En <strong>Noodles®</strong> revolucionamos la comida rápida: hervidos al instante en canastas industriales de precisión, salteados con salsas de verdad en 10 minutos y servidos en nuestro práctico bowl transparente[cite: 2]. ¡El almuerzo o cena ideal!</p>
+      <div class="hero-cta">
+        <a href="#builder" class="btn">🥣 Armar mi Bowl</a>
+        <a href="#video-spot" class="btn-outline">▶ Ver Spot Promo</a>
+      </div>
+      <div class="hero-features">
+        <div class="feature-box"><span>⏱️</span> Listo en 10 min[cite: 2]</div>
+        <div class="feature-box"><span>🥣</span> Bowls Normal, Medio y Grande</div>
+        <div class="feature-box"><span>🍅</span> Salsas Institucionales[cite: 18]</div>
+        <div class="feature-box"><span>🛵</span> Salón, Take-Away & Delivery[cite: 27]</div>
+      </div>
+    </div>
+    <div>
+      <div class="hero-img-card">
+        <img src="assets/images/bolognese_ladle.jpg" alt="Bowl Transparente con Spaguettis y Salsa Bolognesa Noodles">
+        <div class="hero-img-content">
+          <h3 style="color: var(--secondary); margin-bottom: 5px;">El Producto Estrella</h3>
+          <p style="color: var(--gray); font-size: 0.95rem;">Spaguettis al dente + Cucharón de Bolognesa Caliente y queso sardo[cite: 3].</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spot Publicitario / Reproductor de Slides Integrado -->
+  <div class="video-spot-section" id="video-spot">
+    <div class="section-header-center">
+      <span class="section-tag">Spot Publicitario Oficial 2026</span>
+      <h2 style="color: white; margin-top: 5px;">Viví la Experiencia Noodles®</h2>
+      <p style="color: #9ca3af; font-size: 0.95rem;">Mirá cómo preparamos tu porción paso a paso.</p>
+    </div>
+    <div class="video-container">
+      <div class="video-screen">
+        <img id="slideImg" src="assets/images/industrial_cooker.jpg" alt="Escena Spot Noodles" class="video-bg-img">
+        <div class="video-overlay">
+          <h3 id="slideTitle" style="color: var(--accent); font-size: 1.25rem; margin-bottom: 5px;">1. El Hervido Industrial al Dente</h3>
+          <p id="slideDesc" style="color: #f3f4f6; font-size: 0.95rem;">Hervidora industrial de canastas sumergibles. Preparación completa en 10 minutos[cite: 3].</p>
+        </div>
+      </div>
+      <div class="video-controls">
+        <button class="ctrl-btn" onclick="cambiarSlide(-1)">◀ Anterior</button>
+        <span id="slideCounter" style="font-weight: bold; font-size: 0.9rem;">Escena 1 de 3</span>
+        <button class="ctrl-btn" onclick="cambiarSlide(1)">Siguiente ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Armá tu Bowl interactivo con Normal, Medio y Grande -->
+  <section id="builder">
+    <div class="section-header">
+      <span>A tu Gusto</span>
+      <h2>Arma tu Bowl en 3 Pasos</h2>
+      <p>Elegí el tamaño de tu porción, tu salsa favorita y personaliza tu pedido al instante.</p>
+    </div>
+
+    <div class="builder-section">
+      <div class="builder-grid">
+        <div>
+          <!-- Paso 1: Tamaños oficiales -->
+          <div class="builder-step-card">
+            <h3>1. Elegí el Tamaño del Bowl</h3>
+            <div class="options-grid">
+              <button class="option-btn active" onclick="setTamaño('Normal (Chico 100g)', 5500)">Normal (100g)<br><strong>$5.500</strong>[cite: 19, 25]</button>
+              <button class="option-btn" onclick="setTamaño('Medio (150g)', 8000)">Medio (150g)<br><strong>$8.000</strong>[cite: 19, 25]</button>
+              <button class="option-btn" onclick="setTamaño('Grande (200g)', 11000)">Grande (200g)<br><strong>$11.000</strong>[cite: 19, 25]</button>
+            </div>
+          </div>
+
+          <!-- Paso 2: Salsas oficiales -->
+          <div class="builder-step-card">
+            <h3>2. Elegí tu Salsa Principal</h3>
+            <div class="options-grid">
+              <button class="option-btn active" onclick="setSalsa('Bolognesa Tradicional', 0)">Bolognesa[cite: 19]</button>
+              <button class="option-btn" onclick="setSalsa('Pomodoro & Albahaca', 0)">Pomodoro[cite: 19]</button>
+              <button class="option-btn" onclick="setSalsa('4 Quesos Cremoso', 0)">4 Quesos[cite: 19]</button>
+              <button class="option-btn" onclick="setSalsa('Pesto Genovés', 0)">Pesto[cite: 19]</button>
+              <button class="option-btn" onclick="setSalsa('Alfredo con Pollo', 1500)">Alfredo + Pollo (+ $1.500)[cite: 19]</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="builder-summary-box">
+          <div>
+            <h3 style="color: var(--accent);">Resumen de tu Pedido Noodles®</h3>
+            <p id="resumen-seleccion" style="margin-top: 15px; font-size: 1.05rem;">Bowl Normal (100g) + Bolognesa Tradicional</p>
+          </div>
+          <div>
+            <span style="font-size: 0.9rem; color: var(--gray);">Precio Total Estimado:</span>
+            <div class="summary-total" id="precio-total">$5.500</div>
+            <button class="btn" style="width: 100%; text-align: center;" onclick="alert('¡Pedido agregado al carrito con éxito!')">Añadir al Carrito Express</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <img src="assets/images/logo.jpg" alt="Logo Noodles" style="height: 45px; margin-bottom: 10px; border-radius: 8px;">
+      <p>© 2026 Noodles® International Inc. Todos los derechos reservados. FAST SPAGHETTI & MORE®[cite: 17].</p>
+    </div>
+  </footer>
+
+  <script>
+    // Lógica del Configurador de Bowls
+    let precioBase = 5500;
+    let extraSalsa = 0;
+    let nombreTamaño = "Normal (Chico 100g)";
+    let nombreSalsa = "Bolognesa Tradicional";
+
+    function setTamaño(tamaño, precio) {
+      nombreTamaño = tamaño;
+      precioBase = precio;
+      actualizarTotal();
+    }
+
+    function setSalsa(salsa, extra) {
+      nombreSalsa = salsa;
+      extraSalsa = extra;
+      actualizarTotal();
+    }
+
+    function actualizarTotal() {
+      let total = precioBase + extraSalsa;
+      document.getElementById('resumen-seleccion').innerText = `Bowl ${nombreTamaño} + ${nombreSalsa}`;
+      document.getElementById('precio-total').innerText = `$${total.toLocaleString('es-AR')}`;
+    }
+
+    // Lógica del Reproductor de Slides del Spot
+    const slides = [
+      {
+        img: "assets/images/industrial_cooker.jpg",
+        title: "1. El Hervido Industrial al Dente",
+        desc: "Hervidora industrial de canastas sumergibles. Preparación completa en 10 minutos[cite: 3]."
+      },
+      {
+        img: "assets/images/sauteing_pan.jpg",
+        title: "2. El Salteado Exprés al Fuego",
+        desc: "Woks a fuego vivo con aceite de oliva virgen extra y hierbas frescas."
+      },
+      {
+        img: "assets/images/bolognese_ladle.jpg",
+        title: "3. El Bowl Transparente de 100g",
+        desc: "Emplatado directo en bowl térmico cristalino con cucharón de bolognesa casera[cite: 3]."
+      }
+    ];
+
+    let currentSlide = 0;
+
+    function cambiarSlide(direccion) {
+      currentSlide += direccion;
+      if (currentSlide < 0) currentSlide = slides.length - 1;
+      if (currentSlide >= slides.length) currentSlide = 0;
+
+      document.getElementById('slideImg').src = slides[currentSlide].img;
+      document.getElementById('slideTitle').innerText = slides[currentSlide].title;
+      document.getElementById('slideDesc').innerText = slides[currentSlide].desc;
+      document.getElementById('slideCounter').innerText = `Escena ${currentSlide + 1} de ${slides.length}`;
+    }
+  </script>
+</body>
+</html>
